@@ -3,6 +3,7 @@ import java.nio.charset.Charset;
 
 public class KeyIn {
     String buf = null;
+    int i;
     BufferedReader br =
             new BufferedReader(new InputStreamReader(System.in,
                     Charset.forName(System.getProperty("native.encoding"))));
@@ -20,7 +21,23 @@ public class KeyIn {
 
     /* msgで指定された文字列をプロンプトとして表示する */
     public String readKey(String msg) {
-        System.out.print(msg + "=");
+        System.out.print(msg + ">");
         return readKey();
+    }
+
+    /* キーボードで入力した整数を返す */
+    public int readInt() {
+        try {
+            i = Integer.parseInt(br.readLine());
+        } catch (IOException e) {
+            System.out.println(e);
+            System.exit(1);
+        }
+        return i;
+    }
+
+    public int readInt(String msg) {
+        System.out.print(msg + ">");
+        return readInt();
     }
 }
