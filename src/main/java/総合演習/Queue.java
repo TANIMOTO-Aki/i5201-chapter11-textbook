@@ -24,29 +24,42 @@ public class Queue {
                     if (front == rear){
                         System.out.println("データが格納されていません");
                     } else if (front < rear){
-                        for (int i = front; i <= rear; i++) {
+                        for (int i = front; i < rear; i++) {
                             System.out.println("[" + i + "]" + arrayQueue[i]);
                         }
                     } else {
-                        for (int i = front; i == rear; i++){
-                            if(i == arrayQueue.length) i=0;
+                        for (int i = front; i != rear; i = (i + 1) % arrayQueue.length){
                             System.out.println("[" + i + "]" + arrayQueue[i]);
                         }
                     }
                     break;
             
                 case 1:     //格納(enqueue)
-                    if ((rear+1)%(element-1) == front){
+                    if ((rear+1)%(arrayQueue.length) == front){
                         System.out.println("キューがいっぱいです");
                     } else {
                         inData = ki.readInt("データ:");
                         arrayQueue[rear] = inData;
                         rear++;
-                        if(rear >= arrayQueue.length)rear=0;
+                        if(rear >= arrayQueue.length) rear=0;
                     }
-                default:
+                    break;
+
+                case 2:     //取り出し(dequeue)
+                    if(front == rear){
+                        System.out.println("データが格納されていません");
+                    } else {
+                        System.out.println(arrayQueue[front]);
+                        front++;
+                        if(front >= arrayQueue.length) front=0;
+                    }
+                    break;
+                    
+                default:    //識別エラー
+                    System.out.println("識別の入力エラーです");
                     break;
             }
         }
+        System.out.println("---- プログラム終了 ----");
     }
 }
