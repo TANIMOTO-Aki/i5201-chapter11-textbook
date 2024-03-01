@@ -52,14 +52,13 @@ public class ListSearch {
     /* リスト表示を行うメソッド */
     private void listView(){
         int idx = lip;
-        if(idx == -1){
+        if(idx == END_OF_LIST){
             System.out.println("データがありません");
-        }else{
-            while(true){
-                System.out.println("番号:" + arrayNum[idx] + "\t" + "点数:" + arrayScore[idx] );
-                idx = arrayNext[idx];
-                if(idx == -1) return;
-            }
+            return;
+        }
+        while(idx != END_OF_LIST){
+            System.out.println("番号:" + arrayNum[idx] + "\t" + "点数:" + arrayScore[idx] );
+            idx = arrayNext[idx];
         }
     }
 
