@@ -56,6 +56,7 @@ public class ListSearch {
             System.out.println("データがありません");
             return;
         }
+
         while(idx != END_OF_LIST){
             System.out.println("番号:" + arrayNum[idx] + "\t" + "点数:" + arrayScore[idx] );
             idx = arrayNext[idx];
@@ -80,34 +81,32 @@ public class ListSearch {
     /* 追加を行うメソッド */
     private void addToList(int num) {
         KeyIn ki = new KeyIn();
+        if(eip == END_OF_LIST){
+            System.out.println("リストに空きがありません");
+            return;
+        }
         if(lip == END_OF_LIST) lip = eip;
+        int numSearch = lip;
         int idx = lip;
-        int prevIdx = lip;
-        int currentIdx = lip;
         int add = eip;
 
-        while(idx != END_OF_LIST && num != arrayNum[idx]){
-            idx = arrayNext[idx];
+        while((numSearch != END_OF_LIST) && (num != arrayNum[numSearch])){
+            idx = numSearch;
+            numSearch = arrayNext[numSearch];
+        }
+        if(numSearch != END_OF_LIST){
+            System.out.println("登録済みの番号です");
+            return;
         }
 
-        if(add == END_OF_LIST){
-            System.out.println("リストに空きがありません");
-        }else if(idx == END_OF_LIST){
-            int score = ki.readInt("点数:");
-            arrayNum[add] = num;
-            arrayScore[add] = score;
-            while (arrayNext[currentIdx] != END_OF_LIST) {
-                prevIdx = currentIdx;
-                currentIdx = arrayNext[prevIdx];
-            }
-            eip = arrayNext[add];
-            arrayNext[add] = arrayNext[currentIdx];
-            arrayNext[currentIdx] = add;
-            if (lip == eip) eip = END_OF_LIST;
-            System.out.println("追加しました:" + "番号=" + num + " 点数=" + score);
-        }else{
-            System.out.println("登録済みの番号です");
-        }
+        int score = ki.readInt("点数:");
+        arrayNum[add] = num;
+        arrayScore[add] = score;
+        arrayNext[idx] = add;
+        eip = arrayNext[add];
+        arrayNext[add] = END_OF_LIST;
+        if(lip == eip) eip = END_OF_LIST;
+        System.out.println("追加しました 番号=" + num + " 点数=" + score);
     }
 
     /* 更新を行うメソッド */
