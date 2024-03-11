@@ -65,11 +65,8 @@ public class ListSearch {
 
     /* 探索を行うメソッド */
     private void searchFromList(int num) {        
-        int idx = lip;
 
-        while (idx != END_OF_LIST && num != arrayNum[idx]) {
-            idx = arrayNext[idx];
-        }
+        int idx = checkTheList(num);
 
         if (idx != END_OF_LIST) {
             System.out.println(arrayScore[idx]); // 成功
@@ -112,11 +109,7 @@ public class ListSearch {
     /* 更新を行うメソッド */
     private void updateList(int num) {
         KeyIn ki = new KeyIn();
-        int idx = lip;
-
-        while (idx != END_OF_LIST && num != arrayNum[idx]) {
-            idx = arrayNext[idx];
-        }
+        int idx = checkTheList(num);
 
         if (idx != END_OF_LIST) {
             int newScore = ki.readInt("点数:");
@@ -161,5 +154,14 @@ public class ListSearch {
                 System.out.println("要素が見つかりません");
             }
         }
+    }
+
+    /* リストの先頭要素から探索するメソッド */
+    private int checkTheList(int num){
+        int idx = lip;
+        while (idx != END_OF_LIST && num != arrayNum[idx]) {
+            idx = arrayNext[idx];
+        }
+        return idx;
     }
 }
