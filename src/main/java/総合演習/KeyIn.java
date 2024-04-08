@@ -32,6 +32,9 @@ public class KeyIn {
         } catch (IOException e) {
             System.out.println(e);
             System.exit(1);
+        } catch (NumberFormatException e){
+            System.out.println("入力した値に不正があります:"+ e);
+            System.exit(1);
         }
         return i;
     }
