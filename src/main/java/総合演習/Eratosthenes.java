@@ -44,3 +44,4 @@ public class Eratosthenes {
         System.out.println("\n" + count + "個");
     }
 }
+// コミットのテスト用
